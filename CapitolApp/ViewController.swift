@@ -1,5 +1,6 @@
 import UIKit
 import MapKit
+import Combine
 
 class ViewController: UITableViewController, CLLocationManagerDelegate {
 
@@ -9,38 +10,28 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
 
     private var jsonURL = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")
     private let decoder = JSONDecoder()
+    private var cancellables: Set<AnyCancellable> = []
 
 
     override func viewDidLoad() {
         navigationController?.view.backgroundColor = .white
         locationManager.delegate = self
 
-        let ccDataTask = URLSession.shared.dataTask(with: self.jsonURL!, completionHandler: { (data, response, error) in
-            // handle errors
+
+        let combineDataPublisher = URLSession.shared.dataTaskPublisher(for: self.jsonURL!)
+            .map { $0.data }
+            .decode(type: StateModel.self, decoder: self.decoder)
+            .replaceError(with: StateModel(data: []))
+            .eraseToAnyPublisher()
+
+        cancellables.insert( combineDataPublisher.sink { items in
             DispatchQueue.main.async {
-                if let error = error {
-                    print("Error with fetching Weather Data: \(error)")
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Error with the response, unexpected status code: \(String(describing: response))")
-                    return
-                }
-
-                self.capitalData = try! self.decoder.decode(StateModel.self, from: data!)
+                self.capitalData = items
                 self.tableView.reloadData()
                 self.refreshLocation()
                 self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
             }
-
-
         })
-
-        ccDataTask.resume()
-
-
     }
 
     func loadList() {
