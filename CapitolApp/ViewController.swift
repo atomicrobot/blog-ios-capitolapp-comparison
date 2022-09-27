@@ -3,25 +3,48 @@ import MapKit
 
 class ViewController: UITableViewController, CLLocationManagerDelegate {
 
-    var sampleData: StateModel = StateModel(data: [])
+    var capitalData: StateModel = StateModel(data: [])
     var locationManager: CLLocationManager = CLLocationManager()
     var userLocation: CLLocation = CLLocation()
 
+    private var jsonURL = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")
+    private let decoder = JSONDecoder()
+
 
     override func viewDidLoad() {
+        navigationController?.view.backgroundColor = .white
         locationManager.delegate = self
 
-        /// TODO Load JSON from network with closure instead of locally
-        let path = Bundle.main.path(forResource: "data", ofType: "json") ?? ""
-        let data  = try! Data(contentsOf: URL(filePath: path))
-        sampleData = try! JSONDecoder().decode(StateModel.self, from: data)
+        let ccDataTask = URLSession.shared.dataTask(with: self.jsonURL!, completionHandler: { (data, response, error) in
+            // handle errors
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error with fetching Weather Data: \(error)")
+                    return
+                }
 
-        refreshLocation()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200...299).contains(httpResponse.statusCode) else {
+                    print("Error with the response, unexpected status code: \(String(describing: response))")
+                    return
+                }
+
+                self.capitalData = try! self.decoder.decode(StateModel.self, from: data!)
+                self.tableView.reloadData()
+                self.refreshLocation()
+                self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
+            }
+
+
+        })
+
+        ccDataTask.resume()
+
+
     }
 
     func loadList() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -29,20 +52,20 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sampleData.data.count
+        return capitalData.data.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StateCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
 
-        content.text = sampleData.data[indexPath.row].name
+        content.text = capitalData.data[indexPath.row].name
 
         //CLLocationCoordinate2D(latitude: Double(sampleData.data[indexPath.row].lat)!, longitude: Double(sampleData.data[indexPath.row].long)!)
-        let capitalLocation : CLLocation = CLLocation(latitude: Double(sampleData.data[indexPath.row].lat)!, longitude: Double(sampleData.data[indexPath.row].long)!)
+        let capitalLocation : CLLocation = CLLocation(latitude: Double(capitalData.data[indexPath.row].lat)!, longitude: Double(capitalData.data[indexPath.row].long)!)
         let distance = Int(userLocation.distance(from: capitalLocation) / 1000)
 
-        content.secondaryText = sampleData.data[indexPath.row].capital + "  \(distance) km away"
+        content.secondaryText = capitalData.data[indexPath.row].capital + "  \(distance) km away"
 
 
         cell.contentConfiguration = content
@@ -51,10 +74,12 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let capitalLocation : CLLocation = CLLocation(latitude: Double(sampleData.data[indexPath.row].lat)!, longitude: Double(sampleData.data[indexPath.row].long)!)
-        let distance = userLocation.distance(from: capitalLocation)
-        let mapViewController = MapViewController(state: sampleData.data[indexPath.row], userDistance: distance)
+
+        let mapViewController = MapViewController(state: capitalData.data[indexPath.row])
         navigationController?.pushViewController(mapViewController, animated: true)
+
+
+       
     }
 
 

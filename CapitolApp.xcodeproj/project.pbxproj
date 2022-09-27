@@ -46,7 +46,6 @@
 		CD40689F28DDF0DC00D3637B = {
 			isa = PBXGroup;
 			children = (
-				DA72FA8928DDFEDF00A75C57 /* StateModel.swift */,
 				CD4068AA28DDF0DC00D3637B /* CapitolApp */,
 				CD4068A928DDF0DC00D3637B /* Products */,
 			);
@@ -63,6 +62,7 @@
 		CD4068AA28DDF0DC00D3637B /* CapitolApp */ = {
 			isa = PBXGroup;
 			children = (
+				DA72FA8928DDFEDF00A75C57 /* StateModel.swift */,
 				CD4068AB28DDF0DC00D3637B /* AppDelegate.swift */,
 				CD4068AD28DDF0DC00D3637B /* SceneDelegate.swift */,
 				CD4068AF28DDF0DC00D3637B /* ViewController.swift */,

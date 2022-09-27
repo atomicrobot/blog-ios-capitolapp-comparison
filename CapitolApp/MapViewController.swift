@@ -8,36 +8,42 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     private let state: State
-    private let userDistance: CLLocationDistance
     var mapView: MKMapView!
+    
 
-    init(state: State, userDistance: CLLocationDistance) {
+    init(state: State) {
         self.state = state
-        self.userDistance = userDistance
         
         super.init(nibName: nil, bundle: nil)
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(state: State(abbreviation: "NO", name: "Bad", capital: "Bad", lat: "0.0", long: "0.0"), userDistance: 1000.0)
+        self.init(state: State(abbreviation: "NO", name: "Bad", capital: "Bad", lat: "0.0", long: "0.0"))
         }
 
-    /// TODO Add Abbreviation as title
+
     override func viewDidLoad() {
         mapView = MKMapView()
-        let cityCoords = CLLocationCoordinate2D(latitude: Double(state.lat)!, longitude: Double(state.long)!)
+        mapView.delegate = self
 
-
-        /// TODO Fix bounding box for user -- this seems to be a bit too large
-        let span = MKCoordinateSpan(latitudeDelta: abs(cityCoords.latitude - mapView.userLocation.coordinate.latitude), longitudeDelta: abs(cityCoords.longitude - mapView.userLocation.coordinate.longitude))
-        mapView.setCenter(cityCoords, animated: true)
-        mapView.showsUserLocation = true
-        let region = MKCoordinateRegion(center: cityCoords, span: span)
-        mapView.setRegion(region, animated: true)
+        self.mapView.userTrackingMode = .follow
+        self.mapView.showsUserLocation = true
 
         view = mapView
+        navigationController?.view.backgroundColor = .white
+        self.title = state.abbreviation
     }
+
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        let cityCoords = CLLocationCoordinate2D(latitude: Double(state.lat)!, longitude: Double(state.long)!)
+        let cityAnnotation = MKPointAnnotation()
+        cityAnnotation.coordinate = cityCoords
+        cityAnnotation.title = state.capital
+        self.mapView.showAnnotations([cityAnnotation, mapView.userLocation], animated: true)
+    }
+
+
 }
