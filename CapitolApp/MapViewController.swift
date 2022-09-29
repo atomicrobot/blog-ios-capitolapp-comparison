@@ -42,7 +42,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let cityAnnotation = MKPointAnnotation()
         cityAnnotation.coordinate = cityCoords
         cityAnnotation.title = state.capital
-        self.mapView.showAnnotations([cityAnnotation, mapView.userLocation], animated: true)
+        self.mapView.addAnnotation(cityAnnotation)
+
+        self.mapView.region = MKCoordinateRegion.zoom(initialRegion: MKCoordinateRegion(coordinates: [cityCoords, userLocation.coordinate])!)
     }
 
 
