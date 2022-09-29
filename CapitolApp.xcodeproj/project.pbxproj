@@ -15,7 +15,9 @@
 		CD4068B828DDF0DD00D3637B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4068B628DDF0DD00D3637B /* LaunchScreen.storyboard */; };
 		DA72FA8828DDFEA600A75C57 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = DA72FA8728DDFEA600A75C57 /* data.json */; };
 		DA72FA8A28DDFEDF00A75C57 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8928DDFEDF00A75C57 /* StateModel.swift */; };
-		DA72FA8C28DE24D600A75C57 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8B28DE24D600A75C57 /* MapViewController.swift */; };
+		DAF3635A28E4BEF0007F5943 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3635928E4BEF0007F5943 /* SwiftUIView.swift */; };
+		DAF3635C28E4BF31007F5943 /* CapitolListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3635B28E4BF31007F5943 /* CapitolListViewModel.swift */; };
+		DAF3635E28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3635D28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +31,9 @@
 		CD4068B928DDF0DD00D3637B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA72FA8728DDFEA600A75C57 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = ../../../data.json; sourceTree = "<group>"; };
 		DA72FA8928DDFEDF00A75C57 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
-		DA72FA8B28DE24D600A75C57 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		DAF3635928E4BEF0007F5943 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		DAF3635B28E4BF31007F5943 /* CapitolListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitolListViewModel.swift; sourceTree = "<group>"; };
+		DAF3635D28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,7 @@
 		CD40689F28DDF0DC00D3637B = {
 			isa = PBXGroup;
 			children = (
+				DAF3635D28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift */,
 				CD4068AA28DDF0DC00D3637B /* CapitolApp */,
 				CD4068A928DDF0DC00D3637B /* Products */,
 			);
@@ -62,11 +67,12 @@
 		CD4068AA28DDF0DC00D3637B /* CapitolApp */ = {
 			isa = PBXGroup;
 			children = (
+				DAF3635B28E4BF31007F5943 /* CapitolListViewModel.swift */,
+				DAF3635928E4BEF0007F5943 /* SwiftUIView.swift */,
 				DA72FA8928DDFEDF00A75C57 /* StateModel.swift */,
 				CD4068AB28DDF0DC00D3637B /* AppDelegate.swift */,
 				CD4068AD28DDF0DC00D3637B /* SceneDelegate.swift */,
 				CD4068AF28DDF0DC00D3637B /* ViewController.swift */,
-				DA72FA8B28DE24D600A75C57 /* MapViewController.swift */,
 				CD4068B128DDF0DC00D3637B /* Main.storyboard */,
 				CD4068B428DDF0DD00D3637B /* Assets.xcassets */,
 				DA72FA8728DDFEA600A75C57 /* data.json */,
@@ -148,10 +154,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAF3635E28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift in Sources */,
 				CD4068B028DDF0DC00D3637B /* ViewController.swift in Sources */,
 				DA72FA8A28DDFEDF00A75C57 /* StateModel.swift in Sources */,
+				DAF3635A28E4BEF0007F5943 /* SwiftUIView.swift in Sources */,
 				CD4068AC28DDF0DC00D3637B /* AppDelegate.swift in Sources */,
-				DA72FA8C28DE24D600A75C57 /* MapViewController.swift in Sources */,
+				DAF3635C28E4BF31007F5943 /* CapitolListViewModel.swift in Sources */,
 				CD4068AE28DDF0DC00D3637B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
