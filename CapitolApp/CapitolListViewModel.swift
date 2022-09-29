@@ -7,6 +7,7 @@
 
 import Foundation
 import MapKit
+import Combine
 
 class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 
@@ -15,6 +16,7 @@ class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
     @Published var capitalData: StateModel = StateModel(data: [])
     @Published var userLocation: CLLocation = CLLocation()
     let locationManager: CLLocationManager
+    private var cancellables: Set<AnyCancellable> = []
 
     override init() {
 
@@ -23,30 +25,18 @@ class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         super.init()
         self.locationManager.delegate = self
 
-        // grab the data
-        let ccDataTask = URLSession.shared.dataTask(with: self.jsonURL!, completionHandler: { (data, response, error) in
-            // handle errors
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("Error with fetching Weather Data: \(error)")
-                    return
-                }
+        let combineDataPublisher = URLSession.shared.dataTaskPublisher(for: self.jsonURL!)
+                    .map { $0.data }
+                    .decode(type: StateModel.self, decoder: self.decoder)
+                    .replaceError(with: StateModel(data: []))
+                    .eraseToAnyPublisher()
 
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Error with the response, unexpected status code: \(String(describing: response))")
-                    return
-                }
-
-                self.capitalData = try! self.decoder.decode(StateModel.self, from: data!)
-                self.refreshLocation()
-
-            }
-
-
-        })
-
-        ccDataTask.resume()
+                cancellables.insert( combineDataPublisher.sink { items in
+                    DispatchQueue.main.async {
+                        self.capitalData = items
+                        self.refreshLocation()
+                    }
+                })
 
     }
 
