@@ -8,10 +8,10 @@
 import Foundation
 
 struct StateModel: Codable {
-    let data : [State]
+    let data : [USState]
 }
 
-struct State: Codable {
+struct USState: Codable {
     let abbreviation: String
     let name: String
     let capital: String

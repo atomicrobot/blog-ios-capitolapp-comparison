@@ -10,18 +10,18 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
 
-    private let state: State
+    private let state: USState
     var mapView: MKMapView!
     
 
-    init(state: State) {
+    init(state: USState) {
         self.state = state
         
         super.init(nibName: nil, bundle: nil)
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(state: State(abbreviation: "NO", name: "Bad", capital: "Bad", lat: "0.0", long: "0.0"))
+        self.init(state: USState(abbreviation: "NO", name: "BadState", capital: "BadLand", lat: "0.0", long: "0.0"))
         }
 
 
