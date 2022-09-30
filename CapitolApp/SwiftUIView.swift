@@ -11,8 +11,6 @@ import MapKit
 struct SwiftUIView: View {
     @StateObject private var viewModel = CapitolListViewModel()
 
-
-
     init() {
         self._viewModel = StateObject(wrappedValue: CapitolListViewModel())
     }
@@ -21,26 +19,26 @@ struct SwiftUIView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.capitalData.data, id: \.name) { state in
+                ForEach(viewModel.capitalData, id: \.state.name) { stateDistancePair in
                     
-                    let region = MKCoordinateRegion.zoom(initialRegion: MKCoordinateRegion(coordinates: [CLLocationCoordinate2D(latitude: Double(state.lat)!, longitude: Double(state.long)!), viewModel.userLocation.coordinate])!)
+                    let region = MKCoordinateRegion.zoom(initialRegion: MKCoordinateRegion(coordinates: [CLLocationCoordinate2D(latitude: Double(stateDistancePair.state.lat)!, longitude: Double(stateDistancePair.state.long)!), viewModel.userLocation])!)
 
                     NavigationLink {
-                        MapView(state: state,
+                        MapView(state: stateDistancePair.state,
                                 region: region,
-                                cityAnnotation: idLocation(name: state.capital,
-                                                           latitude: Double(state.lat)!,
-                                                           longitude: Double(state.long)!)).navigationTitle(state.abbreviation)
+                                cityAnnotation: idLocation(name: stateDistancePair.state.capital,
+                                                           latitude: Double(stateDistancePair.state.lat)!,
+                                                           longitude: Double(stateDistancePair.state.long)!))
+                        .navigationTitle(stateDistancePair.state.abbreviation)
                     } label: {
                         VStack {
                             HStack {
-                                Text(state.name)
+                                Text(stateDistancePair.state.name)
                                 Spacer()
                             }
                             HStack {
-                                let capitalLocation : CLLocation = CLLocation(latitude: Double(state.lat)!, longitude: Double(state.long)!)
-                                let distance = Int(viewModel.userLocation.distance(from: capitalLocation) / 1000)
-                                Text("\(state.capital) \(String(distance)) km away ").font(.footnote)
+
+                                Text("\(stateDistancePair.state.capital) \(String(stateDistancePair.distanceInKilometers)) km away ").font(.footnote)
                                 Spacer()
                             }
                         }
