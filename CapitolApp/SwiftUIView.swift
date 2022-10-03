@@ -11,12 +11,9 @@ import MapKit
 struct SwiftUIView: View {
     @StateObject private var viewModel = CapitolListViewModel()
 
-
-
     init() {
         self._viewModel = StateObject(wrappedValue: CapitolListViewModel())
     }
-
 
     var body: some View {
         NavigationView {
@@ -26,8 +23,7 @@ struct SwiftUIView: View {
                     let region = MKCoordinateRegion.zoom(initialRegion: MKCoordinateRegion(coordinates: [CLLocationCoordinate2D(latitude: Double(state.lat)!, longitude: Double(state.long)!), viewModel.userLocation.coordinate])!)
 
                     NavigationLink {
-                        MapView(state: state,
-                                region: region,
+                        MapView(region: region,
                                 cityAnnotation: idLocation(name: state.capital,
                                                            latitude: Double(state.lat)!,
                                                            longitude: Double(state.long)!)).navigationTitle(state.abbreviation)
@@ -52,7 +48,6 @@ struct SwiftUIView: View {
 }
 
 struct MapView: View {
-    let state: USState
     @State var region: MKCoordinateRegion
     let cityAnnotation: idLocation
 

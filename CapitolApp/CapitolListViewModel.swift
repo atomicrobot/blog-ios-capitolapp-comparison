@@ -10,43 +10,25 @@ import MapKit
 
 class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 
-    private var jsonURL = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")
+    private var jsonURL = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")!
     private let decoder = JSONDecoder()
     @Published var capitalData: StateModel = StateModel(data: [])
     @Published var userLocation: CLLocation = CLLocation()
     let locationManager: CLLocationManager
 
     override init() {
-
-
         self.locationManager = CLLocationManager()
         super.init()
         self.locationManager.delegate = self
 
         // grab the data
-        let ccDataTask = URLSession.shared.dataTask(with: self.jsonURL!, completionHandler: { (data, response, error) in
-            // handle errors
+        Task{
+            let (data, _) = try await URLSession.shared.data(from: self.jsonURL)
             DispatchQueue.main.async {
-                if let error = error {
-                    print("Error with fetching Weather Data: \(error)")
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Error with the response, unexpected status code: \(String(describing: response))")
-                    return
-                }
-
-                self.capitalData = try! self.decoder.decode(StateModel.self, from: data!)
+                self.capitalData = try! self.decoder.decode(StateModel.self , from: data)
                 self.refreshLocation()
-
             }
-
-
-        })
-
-        ccDataTask.resume()
+        }
 
     }
 
