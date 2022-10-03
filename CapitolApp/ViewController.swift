@@ -15,32 +15,13 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         navigationController?.view.backgroundColor = .white
         locationManager.delegate = self
 
-        let ccDataTask = URLSession.shared.dataTask(with: self.jsonURL!, completionHandler: { (data, response, error) in
-            // handle errors
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("Error with fetching Weather Data: \(error)")
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Error with the response, unexpected status code: \(String(describing: response))")
-                    return
-                }
-
-                self.capitalData = try! self.decoder.decode(StateModel.self, from: data!)
-                self.tableView.reloadData()
-                self.refreshLocation()
-                self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
-            }
-
-
-        })
-
-        ccDataTask.resume()
-
-
+        Task{
+            let (data, _) = try await URLSession.shared.data(from: jsonURL!)
+            self.capitalData = try decoder.decode(StateModel.self , from: data)
+            self.tableView.reloadData()
+            self.refreshLocation()
+            self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
+        }
     }
 
     func loadList() {
@@ -60,8 +41,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         var content = cell.defaultContentConfiguration()
 
         content.text = capitalData.data[indexPath.row].name
-
-        //CLLocationCoordinate2D(latitude: Double(sampleData.data[indexPath.row].lat)!, longitude: Double(sampleData.data[indexPath.row].long)!)
+        
         let capitalLocation : CLLocation = CLLocation(latitude: Double(capitalData.data[indexPath.row].lat)!, longitude: Double(capitalData.data[indexPath.row].long)!)
         let distance = Int(userLocation.distance(from: capitalLocation) / 1000)
 
