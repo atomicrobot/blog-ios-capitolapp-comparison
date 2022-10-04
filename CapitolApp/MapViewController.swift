@@ -21,8 +21,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     required convenience init?(coder: NSCoder) {
-        self.init(state: State(abbreviation: "NO", name: "Bad", capital: "Bad", lat: "0.0", long: "0.0"))
-        }
+        self.init(state: State(abbreviation: "Invalid", name: "Invalid", capital: "Invalid", lat: "0.0", long: "0.0"))
+    }
 
 
     override func viewDidLoad() {
