@@ -15,11 +15,13 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         navigationController?.view.backgroundColor = .white
         locationManager.delegate = self
 
-        let ccDataTask = URLSession.shared.dataTask(with: self.jsonURL!, completionHandler: { (data, response, error) in
-            // handle errors
+        let dataTask = URLSession.shared.dataTask(with: self.jsonURL!, completionHandler: { (data, response, error) in
+
             DispatchQueue.main.async {
+
+                // handle errors
                 if let error = error {
-                    print("Error with fetching Weather Data: \(error)")
+                    print("Error with fetching State Data: \(error)")
                     return
                 }
 
@@ -29,6 +31,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
                     return
                 }
 
+                // decode and load table
                 self.capitalData = try! self.decoder.decode(StateModel.self, from: data!)
                 self.tableView.reloadData()
                 self.refreshLocation()
@@ -38,7 +41,7 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
 
         })
 
-        ccDataTask.resume()
+        dataTask.resume()
 
 
     }
