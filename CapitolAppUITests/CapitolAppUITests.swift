@@ -32,10 +32,29 @@ final class CapitolAppUITests: XCTestCase {
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
+            let options = XCTMeasureOptions()
+            options.iterationCount = 10
+            let app = XCUIApplication()
+
+            measure(metrics: [XCTApplicationLaunchMetric()], options: options) {
+                app.launch()
             }
         }
+    }
+
+    func testLaunchMapPerformance() throws {
+        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+            // This measures how long it takes to launch your application.
+            let options = XCTMeasureOptions()
+            options.iterationCount = 10
+            let app = XCUIApplication()
+
+            measure(metrics: [XCTClockMetric()], options: options) {
+                app.launch()
+                app.swipeUp(velocity: 2200)
+                let ohio = app.buttons["OH"].tap()
+            }
+        }
+
     }
 }
