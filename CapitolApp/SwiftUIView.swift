@@ -59,7 +59,7 @@ struct MapView: View {
         Map(coordinateRegion: self.$region, showsUserLocation: true, annotationItems: [cityAnnotation])
         { item in
             MapMarker(coordinate: CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude))
-        }
+        }.ignoresSafeArea(edges: .bottom)
     }
 }
 
