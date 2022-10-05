@@ -42,7 +42,7 @@ struct SwiftUIView: View {
                                 Spacer()
                             }
                         }
-                    }
+                    }.accessibilityIdentifier(stateDistancePair.state.abbreviation)
                 }
             }
         }
