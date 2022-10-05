@@ -21,7 +21,7 @@ struct SwiftUIView: View {
             List {
                 ForEach(viewModel.capitalData, id: \.state.name) { stateDistancePair in
                     
-                    let region = MKCoordinateRegion.zoom(initialRegion: MKCoordinateRegion(coordinates: [CLLocationCoordinate2D(latitude: Double(stateDistancePair.state.lat)!, longitude: Double(stateDistancePair.state.long)!), viewModel.userLocation])!)
+                    let region = MKCoordinateRegion.zoom(initialRegion: MKCoordinateRegion(coordinates: [stateDistancePair.state.getCapitolLocation().coordinate, viewModel.userLocation])!)
 
                     NavigationLink {
                         MapView(state: stateDistancePair.state,
