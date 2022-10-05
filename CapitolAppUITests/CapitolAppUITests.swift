@@ -51,7 +51,7 @@ final class CapitolAppUITests: XCTestCase {
 
             measure(metrics: [XCTClockMetric()], options: options) {
                 app.launch()
-                app.swipeUp(velocity: 1400)
+                app.swipeUp(velocity: 2200)
                 let ohio = app.buttons["OH"].tap()
             }
         }
