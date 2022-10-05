@@ -15,10 +15,22 @@
 		CD4068B828DDF0DD00D3637B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4068B628DDF0DD00D3637B /* LaunchScreen.storyboard */; };
 		DA72FA8828DDFEA600A75C57 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = DA72FA8728DDFEA600A75C57 /* data.json */; };
 		DA72FA8A28DDFEDF00A75C57 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8928DDFEDF00A75C57 /* StateModel.swift */; };
+		DAD36DC728ECB0AB00D5AA29 /* CapitolAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD36DC628ECB0AB00D5AA29 /* CapitolAppUITests.swift */; };
+		DAD36DC928ECB0AB00D5AA29 /* CapitolAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD36DC828ECB0AB00D5AA29 /* CapitolAppUITestsLaunchTests.swift */; };
 		DAF3635A28E4BEF0007F5943 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3635928E4BEF0007F5943 /* SwiftUIView.swift */; };
 		DAF3635C28E4BF31007F5943 /* CapitolListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3635B28E4BF31007F5943 /* CapitolListViewModel.swift */; };
 		DAF3635E28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3635D28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DAD36DCA28ECB0AB00D5AA29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD4068A028DDF0DC00D3637B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD4068A728DDF0DC00D3637B;
+			remoteInfo = CapitolApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CD4068A828DDF0DC00D3637B /* CapitolApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapitolApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,6 +43,9 @@
 		CD4068B928DDF0DD00D3637B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA72FA8728DDFEA600A75C57 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = ../../../data.json; sourceTree = "<group>"; };
 		DA72FA8928DDFEDF00A75C57 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
+		DAD36DC428ECB0AB00D5AA29 /* CapitolAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapitolAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAD36DC628ECB0AB00D5AA29 /* CapitolAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitolAppUITests.swift; sourceTree = "<group>"; };
+		DAD36DC828ECB0AB00D5AA29 /* CapitolAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitolAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DAF3635928E4BEF0007F5943 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		DAF3635B28E4BF31007F5943 /* CapitolListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitolListViewModel.swift; sourceTree = "<group>"; };
 		DAF3635D28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extensions.swift"; sourceTree = "<group>"; };
@@ -38,6 +53,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		CD4068A528DDF0DC00D3637B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD36DC128ECB0AB00D5AA29 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -52,6 +74,7 @@
 			children = (
 				DAF3635D28E5D746007F5943 /* MKCoordinateRegion+Extensions.swift */,
 				CD4068AA28DDF0DC00D3637B /* CapitolApp */,
+				DAD36DC528ECB0AB00D5AA29 /* CapitolAppUITests */,
 				CD4068A928DDF0DC00D3637B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				CD4068A828DDF0DC00D3637B /* CapitolApp.app */,
+				DAD36DC428ECB0AB00D5AA29 /* CapitolAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +106,15 @@
 			path = CapitolApp;
 			sourceTree = "<group>";
 		};
+		DAD36DC528ECB0AB00D5AA29 /* CapitolAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DAD36DC628ECB0AB00D5AA29 /* CapitolAppUITests.swift */,
+				DAD36DC828ECB0AB00D5AA29 /* CapitolAppUITestsLaunchTests.swift */,
+			);
+			path = CapitolAppUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -102,6 +135,24 @@
 			productReference = CD4068A828DDF0DC00D3637B /* CapitolApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DAD36DC328ECB0AB00D5AA29 /* CapitolAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAD36DCE28ECB0AB00D5AA29 /* Build configuration list for PBXNativeTarget "CapitolAppUITests" */;
+			buildPhases = (
+				DAD36DC028ECB0AB00D5AA29 /* Sources */,
+				DAD36DC128ECB0AB00D5AA29 /* Frameworks */,
+				DAD36DC228ECB0AB00D5AA29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAD36DCB28ECB0AB00D5AA29 /* PBXTargetDependency */,
+			);
+			name = CapitolAppUITests;
+			productName = CapitolAppUITests;
+			productReference = DAD36DC428ECB0AB00D5AA29 /* CapitolAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -114,6 +165,10 @@
 				TargetAttributes = {
 					CD4068A728DDF0DC00D3637B = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					DAD36DC328ECB0AB00D5AA29 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = CD4068A728DDF0DC00D3637B;
 					};
 				};
 			};
@@ -131,6 +186,7 @@
 			projectRoot = "";
 			targets = (
 				CD4068A728DDF0DC00D3637B /* CapitolApp */,
+				DAD36DC328ECB0AB00D5AA29 /* CapitolAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -144,6 +200,13 @@
 				CD4068B528DDF0DD00D3637B /* Assets.xcassets in Resources */,
 				CD4068B328DDF0DC00D3637B /* Main.storyboard in Resources */,
 				DA72FA8828DDFEA600A75C57 /* data.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD36DC228ECB0AB00D5AA29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,7 +227,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAD36DC028ECB0AB00D5AA29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD36DC728ECB0AB00D5AA29 /* CapitolAppUITests.swift in Sources */,
+				DAD36DC928ECB0AB00D5AA29 /* CapitolAppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DAD36DCB28ECB0AB00D5AA29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD4068A728DDF0DC00D3637B /* CapitolApp */;
+			targetProxy = DAD36DCA28ECB0AB00D5AA29 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CD4068B128DDF0DC00D3637B /* Main.storyboard */ = {
@@ -360,6 +440,38 @@
 			};
 			name = Release;
 		};
+		DAD36DCC28ECB0AB00D5AA29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = bret.CapitolAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CapitolApp;
+			};
+			name = Debug;
+		};
+		DAD36DCD28ECB0AB00D5AA29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = bret.CapitolAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CapitolApp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -377,6 +489,15 @@
 			buildConfigurations = (
 				CD4068BD28DDF0DD00D3637B /* Debug */,
 				CD4068BE28DDF0DD00D3637B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAD36DCE28ECB0AB00D5AA29 /* Build configuration list for PBXNativeTarget "CapitolAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD36DCC28ECB0AB00D5AA29 /* Debug */,
+				DAD36DCD28ECB0AB00D5AA29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

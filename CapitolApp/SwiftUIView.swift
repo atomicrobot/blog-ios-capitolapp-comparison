@@ -45,6 +45,7 @@ struct SwiftUIView: View {
                             }
                         }
                     }
+                    .accessibilityIdentifier(state.abbreviation)
                 }
             }
         }
