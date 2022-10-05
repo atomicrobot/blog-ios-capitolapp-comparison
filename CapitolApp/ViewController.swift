@@ -66,7 +66,7 @@ class ViewController: UITableViewController {
     func loadUSStates() -> AnyPublisher<StateModel, Error> {
         return URLSession.shared.dataTaskPublisher(for: self.jsonURL)
             .map { $0.data }
-            .map { try! self.decoder.decode(StateModel.self, from: $0) }
+            .tryMap { try self.decoder.decode(StateModel.self, from: $0) }
             .mapError { return $0 }
             .eraseToAnyPublisher()
     }
