@@ -3,11 +3,10 @@ import MapKit
 
 class ViewController: UITableViewController, CLLocationManagerDelegate {
 
-    var capitalData: StateModel = StateModel(data: [])
-    var locationManager: CLLocationManager = CLLocationManager()
-    var userLocation: CLLocation = CLLocation()
-
-    private var jsonURL = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")
+    private var capitalData: StateModel = StateModel(data: [])
+    private var locationManager: CLLocationManager = CLLocationManager()
+    private var userLocation: CLLocation = CLLocation()
+    private var jsonURL = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")!
     private let decoder = JSONDecoder()
 
 
@@ -15,59 +14,58 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
         navigationController?.view.backgroundColor = .white
         locationManager.delegate = self
 
+        // Asynchronous call to retrieve the data
         Task{
-            let (data, _) = try await URLSession.shared.data(from: jsonURL!)
+            let (data, _) = try await URLSession.shared.data(from: jsonURL)
             self.capitalData = try decoder.decode(StateModel.self , from: data)
-            self.tableView.reloadData()
-            self.refreshLocation()
+
+            // Register the table and check the user location authorization
             self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
+            self.checkUserLocationAuthorization()
+
         }
     }
 
-    func loadList() {
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-
+    // Define the number of rows in the table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return capitalData.data.count
     }
 
+    // Set up each row in the table
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StateCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
 
+        // Set the state name for the cell
         content.text = capitalData.data[indexPath.row].name
-        
+
+        // Get the capital location and find the distance in kilometers
         let capitalLocation : CLLocation = CLLocation(latitude: Double(capitalData.data[indexPath.row].lat)!, longitude: Double(capitalData.data[indexPath.row].long)!)
         let distance = Int(userLocation.distance(from: capitalLocation) / 1000)
 
+        // Set the capital name and the user's distance from the capital
         content.secondaryText = capitalData.data[indexPath.row].capital + "  \(distance) km away"
 
-
+        // Set and return the cell with the configured content
         cell.contentConfiguration = content
         return cell
     }
 
+    // When a row has been tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-
+        // Load a MapViewController for that state and push to nav stack
         let mapViewController = MapViewController(state: capitalData.data[indexPath.row])
         navigationController?.pushViewController(mapViewController, animated: true)
-
-
        
     }
 
 
 
     // Location functions
-    func refreshLocation()  {
-        switch locationManager.authorizationStatus {
+    func checkUserLocationAuthorization()  {
 
+        switch locationManager.authorizationStatus {
         case .notDetermined:
             // prompt the user
             print("Asking user")
@@ -96,19 +94,20 @@ class ViewController: UITableViewController, CLLocationManagerDelegate {
 
     // Callback for when the location manager changes authorization status
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        refreshLocation()
+        // Check the authorization status again
+        checkUserLocationAuthorization()
     }
 
-    // When the user location updates, reload the list
+    // Callback for when the user location changes
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // Update the user location and reload the table
         userLocation = locations[0]
-        loadList()
+        self.tableView.reloadData()
     }
 
     // Error for location manager
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
-
     }
 
 }
