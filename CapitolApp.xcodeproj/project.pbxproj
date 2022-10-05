@@ -16,8 +16,20 @@
 		DA72FA8828DDFEA600A75C57 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = DA72FA8728DDFEA600A75C57 /* data.json */; };
 		DA72FA8A28DDFEDF00A75C57 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8928DDFEDF00A75C57 /* StateModel.swift */; };
 		DA72FA8C28DE24D600A75C57 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8B28DE24D600A75C57 /* MapViewController.swift */; };
+		DAD36DD628EDA74800D5AA29 /* CapitolAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD36DD528EDA74800D5AA29 /* CapitolAppUITests.swift */; };
+		DAD36DD828EDA74800D5AA29 /* CapitolAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD36DD728EDA74800D5AA29 /* CapitolAppUITestsLaunchTests.swift */; };
 		DAF3636228E5E195007F5943 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3636128E5E195007F5943 /* MKCoordinateRegion+Extension.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DAD36DD928EDA74800D5AA29 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD4068A028DDF0DC00D3637B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD4068A728DDF0DC00D3637B;
+			remoteInfo = CapitolApp;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CD4068A828DDF0DC00D3637B /* CapitolApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CapitolApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,11 +43,21 @@
 		DA72FA8728DDFEA600A75C57 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = ../../../data.json; sourceTree = "<group>"; };
 		DA72FA8928DDFEDF00A75C57 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		DA72FA8B28DE24D600A75C57 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		DAD36DD328EDA74800D5AA29 /* CapitolAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapitolAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAD36DD528EDA74800D5AA29 /* CapitolAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitolAppUITests.swift; sourceTree = "<group>"; };
+		DAD36DD728EDA74800D5AA29 /* CapitolAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitolAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DAF3636128E5E195007F5943 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CD4068A528DDF0DC00D3637B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD36DD028EDA74800D5AA29 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -50,6 +72,7 @@
 			children = (
 				DAF3636128E5E195007F5943 /* MKCoordinateRegion+Extension.swift */,
 				CD4068AA28DDF0DC00D3637B /* CapitolApp */,
+				DAD36DD428EDA74800D5AA29 /* CapitolAppUITests */,
 				CD4068A928DDF0DC00D3637B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				CD4068A828DDF0DC00D3637B /* CapitolApp.app */,
+				DAD36DD328EDA74800D5AA29 /* CapitolAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,6 +101,15 @@
 				CD4068B928DDF0DD00D3637B /* Info.plist */,
 			);
 			path = CapitolApp;
+			sourceTree = "<group>";
+		};
+		DAD36DD428EDA74800D5AA29 /* CapitolAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DAD36DD528EDA74800D5AA29 /* CapitolAppUITests.swift */,
+				DAD36DD728EDA74800D5AA29 /* CapitolAppUITestsLaunchTests.swift */,
+			);
+			path = CapitolAppUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +132,24 @@
 			productReference = CD4068A828DDF0DC00D3637B /* CapitolApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DAD36DD228EDA74800D5AA29 /* CapitolAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAD36DDD28EDA74800D5AA29 /* Build configuration list for PBXNativeTarget "CapitolAppUITests" */;
+			buildPhases = (
+				DAD36DCF28EDA74800D5AA29 /* Sources */,
+				DAD36DD028EDA74800D5AA29 /* Frameworks */,
+				DAD36DD128EDA74800D5AA29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAD36DDA28EDA74800D5AA29 /* PBXTargetDependency */,
+			);
+			name = CapitolAppUITests;
+			productName = CapitolAppUITests;
+			productReference = DAD36DD328EDA74800D5AA29 /* CapitolAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -111,6 +162,10 @@
 				TargetAttributes = {
 					CD4068A728DDF0DC00D3637B = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					DAD36DD228EDA74800D5AA29 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = CD4068A728DDF0DC00D3637B;
 					};
 				};
 			};
@@ -128,6 +183,7 @@
 			projectRoot = "";
 			targets = (
 				CD4068A728DDF0DC00D3637B /* CapitolApp */,
+				DAD36DD228EDA74800D5AA29 /* CapitolAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -141,6 +197,13 @@
 				CD4068B528DDF0DD00D3637B /* Assets.xcassets in Resources */,
 				CD4068B328DDF0DC00D3637B /* Main.storyboard in Resources */,
 				DA72FA8828DDFEA600A75C57 /* data.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD36DD128EDA74800D5AA29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +223,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAD36DCF28EDA74800D5AA29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD36DD628EDA74800D5AA29 /* CapitolAppUITests.swift in Sources */,
+				DAD36DD828EDA74800D5AA29 /* CapitolAppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DAD36DDA28EDA74800D5AA29 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD4068A728DDF0DC00D3637B /* CapitolApp */;
+			targetProxy = DAD36DD928EDA74800D5AA29 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CD4068B128DDF0DC00D3637B /* Main.storyboard */ = {
@@ -356,6 +436,38 @@
 			};
 			name = Release;
 		};
+		DAD36DDB28EDA74800D5AA29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = bret.CapitolAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CapitolApp;
+			};
+			name = Debug;
+		};
+		DAD36DDC28EDA74800D5AA29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = bret.CapitolAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CapitolApp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -373,6 +485,15 @@
 			buildConfigurations = (
 				CD4068BD28DDF0DD00D3637B /* Debug */,
 				CD4068BE28DDF0DD00D3637B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAD36DDD28EDA74800D5AA29 /* Build configuration list for PBXNativeTarget "CapitolAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD36DDB28EDA74800D5AA29 /* Debug */,
+				DAD36DDC28EDA74800D5AA29 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
