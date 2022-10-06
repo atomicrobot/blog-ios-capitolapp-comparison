@@ -10,43 +10,41 @@ import MapKit
 
 class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 
-    private var jsonURL = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")
+    private var jsonURL = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")!
     private let decoder = JSONDecoder()
-    @Published var capitalData: StateModel = StateModel(data: [])
+    @Published var capitalData: StateModel?
     @Published var userLocation: CLLocation = CLLocation()
     let locationManager: CLLocationManager
 
     override init() {
-
-
         self.locationManager = CLLocationManager()
         super.init()
         self.locationManager.delegate = self
 
-        // grab the data
-        let ccDataTask = URLSession.shared.dataTask(with: self.jsonURL!, completionHandler: { (data, response, error) in
-            // handle errors
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("Error with fetching Weather Data: \(error)")
-                    return
-                }
+        // Refresh the user's location
+        self.refreshLocation()
 
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Error with the response, unexpected status code: \(String(describing: response))")
-                    return
-                }
+        // Start the data task and provide it with a completion handler
+        let dataTask = URLSession.shared.dataTask(with: self.jsonURL, completionHandler: { [weak self] (data, response, error) in
 
-                self.capitalData = try! self.decoder.decode(StateModel.self, from: data!)
-                self.refreshLocation()
-
+            // Handle errors
+            if let error = error {
+                print("Error with fetching Weather Data: \(error)")
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                print("Error with the response, unexpected status code: \(String(describing: response))")
+                return
             }
 
+            // Update the capital data on the main thread
+            DispatchQueue.main.async {
+                self?.capitalData = try! self?.decoder.decode(StateModel.self, from: data!)
+            }
 
         })
-
-        ccDataTask.resume()
+        dataTask.resume()
 
     }
 
@@ -88,15 +86,13 @@ class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
 
     // When the user location updates, reload the list
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.userLocation = locations[0]
-
+        DispatchQueue.main.async {
+            self.userLocation = locations[0]
+        }
     }
 
     // Error for location manager
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
-
     }
-
-
 }

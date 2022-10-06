@@ -11,8 +11,6 @@ import MapKit
 struct SwiftUIView: View {
     @StateObject private var viewModel = CapitolListViewModel()
 
-
-
     init() {
         self._viewModel = StateObject(wrappedValue: CapitolListViewModel())
     }
@@ -21,7 +19,7 @@ struct SwiftUIView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.capitalData.data, id: \.name) { state in
+                ForEach(viewModel.capitalData?.data ?? [], id: \.name) { state in
                     
                     let region = MKCoordinateRegion.zoom(initialRegion: MKCoordinateRegion(coordinates: [CLLocationCoordinate2D(latitude: Double(state.lat)!, longitude: Double(state.long)!), viewModel.userLocation.coordinate])!)
 
