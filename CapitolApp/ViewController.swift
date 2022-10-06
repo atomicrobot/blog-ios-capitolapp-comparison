@@ -15,25 +15,31 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         navigationController?.view.backgroundColor = .white
 
+        // Register the table
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
 
+        // Load the Capital data
         cancellables.insert(loadUSStatesWithDistances().replaceError(with: []).sink { items in
             DispatchQueue.main.async {
                 self.capitalData = items
+                // Reload the table to display the newly retrieved data
                 self.tableView.reloadData()
             }
         })
 
     }
 
+    // Number of sections in the table
     override func numberOfSections(in tableView: UITableView) -> Int {
         1
     }
 
+    // Number of rows in the table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return capitalData.count
     }
 
+    // The content of each row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StateCell", for: indexPath)
         var content = cell.defaultContentConfiguration()
@@ -46,6 +52,7 @@ class ViewController: UITableViewController {
         return cell
     }
 
+    // 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = capitalData[indexPath.row]
         let mapViewController = MapViewController(state: data.state)
