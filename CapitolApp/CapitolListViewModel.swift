@@ -20,13 +20,17 @@ class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
         self.locationManager = CLLocationManager()
         super.init()
         self.locationManager.delegate = self
+        self.refreshLocation()
 
-        // grab the data
+        // Start a task to retrieve the data
         Task{
+            // Try to grab the data and wait for a response
             let (data, _) = try await URLSession.shared.data(from: self.jsonURL)
+
+            // Update decode and update the capital data on the main thread
             DispatchQueue.main.async {
                 self.capitalData = try! self.decoder.decode(StateModel.self , from: data)
-                self.refreshLocation()
+
             }
         }
 
@@ -70,15 +74,13 @@ class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
 
     // When the user location updates, reload the list
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.userLocation = locations[0]
-
+        DispatchQueue.main.async {
+            self.userLocation = locations[0]
+        }
     }
 
     // Error for location manager
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
-
     }
-
-
 }
