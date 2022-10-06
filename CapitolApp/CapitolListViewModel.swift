@@ -45,7 +45,6 @@ class CapitolListViewModel: NSObject, ObservableObject, CLLocationManagerDelegat
 
         })
         dataTask.resume()
-
     }
 
 
