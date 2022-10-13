@@ -13,7 +13,6 @@
 		CD4068B328DDF0DC00D3637B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4068B128DDF0DC00D3637B /* Main.storyboard */; };
 		CD4068B528DDF0DD00D3637B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD4068B428DDF0DD00D3637B /* Assets.xcassets */; };
 		CD4068B828DDF0DD00D3637B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4068B628DDF0DD00D3637B /* LaunchScreen.storyboard */; };
-		DA72FA8828DDFEA600A75C57 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = DA72FA8728DDFEA600A75C57 /* data.json */; };
 		DA72FA8A28DDFEDF00A75C57 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8928DDFEDF00A75C57 /* StateModel.swift */; };
 		DA72FA8C28DE24D600A75C57 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8B28DE24D600A75C57 /* MapViewController.swift */; };
 		DAD36DD628EDA74800D5AA29 /* CapitolAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD36DD528EDA74800D5AA29 /* CapitolAppUITests.swift */; };
@@ -40,7 +39,6 @@
 		CD4068B428DDF0DD00D3637B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD4068B728DDF0DD00D3637B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD4068B928DDF0DD00D3637B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA72FA8728DDFEA600A75C57 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = ../../../data.json; sourceTree = "<group>"; };
 		DA72FA8928DDFEDF00A75C57 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		DA72FA8B28DE24D600A75C57 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DAD36DD328EDA74800D5AA29 /* CapitolAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapitolAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +94,6 @@
 				DA72FA8B28DE24D600A75C57 /* MapViewController.swift */,
 				CD4068B128DDF0DC00D3637B /* Main.storyboard */,
 				CD4068B428DDF0DD00D3637B /* Assets.xcassets */,
-				DA72FA8728DDFEA600A75C57 /* data.json */,
 				CD4068B628DDF0DD00D3637B /* LaunchScreen.storyboard */,
 				CD4068B928DDF0DD00D3637B /* Info.plist */,
 			);
@@ -196,7 +193,6 @@
 				CD4068B828DDF0DD00D3637B /* LaunchScreen.storyboard in Resources */,
 				CD4068B528DDF0DD00D3637B /* Assets.xcassets in Resources */,
 				CD4068B328DDF0DC00D3637B /* Main.storyboard in Resources */,
-				DA72FA8828DDFEA600A75C57 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
