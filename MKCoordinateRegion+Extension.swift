@@ -1,9 +1,3 @@
-//
-//  MKCoordinateRegion+Extensions.swift
-//  CapitolApp
-//
-//  Created by Bret Leupen on 9/29/22.
-//
 import Foundation
 import MapKit
 import CoreLocation
