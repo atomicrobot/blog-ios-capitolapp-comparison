@@ -53,7 +53,7 @@ final class CapitolAppUITests: XCTestCase {
                 app.launch()
                 app.swipeUp(velocity: 2200)
 
-                let ohio = app.staticTexts["Ohio"].tap()
+                app.staticTexts["Ohio"].tap()
             }
         }
 
