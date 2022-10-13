@@ -2,10 +2,10 @@ import Foundation
 import CoreLocation
 
 struct StateModel: Codable {
-    let data : [State]
+    let data : [USState]
 }
 
-struct State: Codable {
+struct USState: Codable {
     let abbreviation: String
     let name: String
     let capital: String
@@ -13,7 +13,7 @@ struct State: Codable {
     let long: String
 }
 
-extension State {
+extension USState {
     var capitalLocation: CLLocation {
         return CLLocation(latitude: Double(lat)!, longitude: Double(long)!)
     }

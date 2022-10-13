@@ -13,16 +13,15 @@
 		CD4068B328DDF0DC00D3637B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4068B128DDF0DC00D3637B /* Main.storyboard */; };
 		CD4068B528DDF0DD00D3637B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD4068B428DDF0DD00D3637B /* Assets.xcassets */; };
 		CD4068B828DDF0DD00D3637B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4068B628DDF0DD00D3637B /* LaunchScreen.storyboard */; };
-
 		CDCF1BF128F5D5A6007C58CF /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCF1BF028F5D5A6007C58CF /* ApiClient.swift */; };
 		CDCF1BF328F5F227007C58CF /* CurrentLocationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDCF1BF228F5F227007C58CF /* CurrentLocationClient.swift */; };
 		CDEBA81E28F84519008CAF6F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEBA81D28F84519008CAF6F /* ViewModel.swift */; };
-
 		DA72FA8A28DDFEDF00A75C57 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8928DDFEDF00A75C57 /* StateModel.swift */; };
 		DA72FA8C28DE24D600A75C57 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA72FA8B28DE24D600A75C57 /* MapViewController.swift */; };
 		DAD36DD628EDA74800D5AA29 /* CapitolAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD36DD528EDA74800D5AA29 /* CapitolAppUITests.swift */; };
 		DAD36DD828EDA74800D5AA29 /* CapitolAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD36DD728EDA74800D5AA29 /* CapitolAppUITestsLaunchTests.swift */; };
 		DAF3636228E5E195007F5943 /* MKCoordinateRegion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3636128E5E195007F5943 /* MKCoordinateRegion+Extension.swift */; };
+		DAFD5F8F28F8637F0072CC8B /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFD5F8E28F8637F0072CC8B /* SwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,17 +43,16 @@
 		CD4068B428DDF0DD00D3637B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD4068B728DDF0DD00D3637B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD4068B928DDF0DD00D3637B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-
 		CDCF1BF028F5D5A6007C58CF /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		CDCF1BF228F5F227007C58CF /* CurrentLocationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationClient.swift; sourceTree = "<group>"; };
 		CDEBA81D28F84519008CAF6F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-
 		DA72FA8928DDFEDF00A75C57 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		DA72FA8B28DE24D600A75C57 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DAD36DD328EDA74800D5AA29 /* CapitolAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CapitolAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD36DD528EDA74800D5AA29 /* CapitolAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitolAppUITests.swift; sourceTree = "<group>"; };
 		DAD36DD728EDA74800D5AA29 /* CapitolAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapitolAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DAF3636128E5E195007F5943 /* MKCoordinateRegion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extension.swift"; sourceTree = "<group>"; };
+		DAFD5F8E28F8637F0072CC8B /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +99,7 @@
 				CD4068AD28DDF0DC00D3637B /* SceneDelegate.swift */,
 				CD4068AF28DDF0DC00D3637B /* ViewController.swift */,
 				DA72FA8B28DE24D600A75C57 /* MapViewController.swift */,
+				DAFD5F8E28F8637F0072CC8B /* SwiftUIView.swift */,
 				CDEBA81D28F84519008CAF6F /* ViewModel.swift */,
 				CDCF1BF228F5F227007C58CF /* CurrentLocationClient.swift */,
 				CDCF1BF028F5D5A6007C58CF /* ApiClient.swift */,
@@ -227,6 +226,7 @@
 				CDEBA81E28F84519008CAF6F /* ViewModel.swift in Sources */,
 				CDCF1BF328F5F227007C58CF /* CurrentLocationClient.swift in Sources */,
 				CD4068B028DDF0DC00D3637B /* ViewController.swift in Sources */,
+				DAFD5F8F28F8637F0072CC8B /* SwiftUIView.swift in Sources */,
 				DAF3636228E5E195007F5943 /* MKCoordinateRegion+Extension.swift in Sources */,
 				DA72FA8A28DDFEDF00A75C57 /* StateModel.swift in Sources */,
 				CD4068AC28DDF0DC00D3637B /* AppDelegate.swift in Sources */,
