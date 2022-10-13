@@ -58,16 +58,18 @@ class ViewModel: ObservableObject {
     private func dataChanged() {
         // If we don't have our BOTH states AND current location, return an empty list
         if let stateModel = self.stateModel, let userLocation = self.userLocation {
-            self.states = stateModel.data.map { state in
-                let capitalLocation = state.capitalLocation
-                let distance = Int(userLocation.distance(from: capitalLocation) / 1000)
-                let formattedCapitalDistance = state.capital + "  \(distance) km away"
-                return DisplayedState(state: state, stateName: state.name, formattedCapitalDistance: formattedCapitalDistance)
+            DispatchQueue.main.async {
+                self.states = stateModel.data.map { state in
+                    let capitalLocation = state.capitalLocation
+                    let distance = Int(userLocation.distance(from: capitalLocation) / 1000)
+                    let formattedCapitalDistance = state.capital + "  \(distance) km away"
+                    return DisplayedState(state: state, stateName: state.name, formattedCapitalDistance: formattedCapitalDistance)
+                }
             }
         } else {
-            self.states = []
+            DispatchQueue.main.async {
+                self.states = []
+            }
         }
-        
-        //statesDataChanged()
     }
 }
