@@ -9,7 +9,9 @@ class ViewController: UITableViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
         self.viewModel.startTrackingDistanceFromStateCapitals { [weak self] in
             guard let self = self else { return }
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     

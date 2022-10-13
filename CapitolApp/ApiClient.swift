@@ -11,38 +11,22 @@ enum ApiError: Error {
 
 class ApiClient {
     func loadUStates(completion: @escaping (ApiResult<StateModel>) -> ()) {
-        let request = URLRequest(url: URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")!)
+        let request = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")!
         jsonRequest(request, completion)
     }
 }
 
 extension ApiClient {
-    private func jsonRequest<T: Codable>(_ request: URLRequest, _ completion: @escaping (ApiResult<T>) -> ()) {
-        URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-            DispatchQueue.main.async {
-                if let error = error {
-                    completion(ApiResult.failure(ApiError.unspecificError(error)))
-                    return
-                }
-                
-                guard let response = response, let httpResponse = response as? HTTPURLResponse else {
-                    completion(ApiResult.failure(ApiError.responseError(response)))
-                    return
-                }
-                
-                if httpResponse.statusCode != 200 {
-                    completion(ApiResult.failure(ApiError.statusCodeError(httpResponse)))
-                    return
-                }
-                
-                let decoder = JSONDecoder()
-                guard let data = data, let parsed = try? decoder.decode(T.self, from: data) else {
-                    completion(ApiResult.failure(ApiError.unparseableDataError(data)))
-                    return
-                }
-                
-                completion(ApiResult.success(parsed))
+    private func jsonRequest<T: Codable>(_ request: URL, _ completion: @escaping (ApiResult<T>) -> ()) {
+        Task {
+            let decoder = JSONDecoder()
+            do {
+                let (data, _) = try await URLSession.shared.data(from: request)
+                let capitalData = try decoder.decode(T.self , from: data)
+                completion(ApiResult.success(capitalData))
+            } catch {
+                completion(ApiResult.failure(ApiError.unspecificError(error)))
             }
-        }).resume()
+        }
     }
 }
