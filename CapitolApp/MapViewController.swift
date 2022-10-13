@@ -18,7 +18,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView = MKMapView()
         mapView.delegate = self
 
-        self.mapView.userTrackingMode = .follow
+        //self.mapView.userTrackingMode = .follow
         self.mapView.showsUserLocation = true
 
         self.view = mapView
@@ -27,10 +27,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
 
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+
         let capitalAnnotation = MKPointAnnotation()
         capitalAnnotation.coordinate = state.capitalLocation.coordinate
         capitalAnnotation.title = state.capital
         self.mapView.addAnnotation(capitalAnnotation)
+
 
         let region = MKCoordinateRegion(coordinates: [state.capitalLocation.coordinate, userLocation.coordinate])!
         self.mapView.region = MKCoordinateRegion.zoom(initialRegion: region)
