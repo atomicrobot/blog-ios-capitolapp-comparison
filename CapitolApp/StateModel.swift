@@ -1,11 +1,5 @@
-//
-//  StateModel.swift
-//  CapitolApp
-//
-//  Created by Bret Leupen on 9/23/22.
-//
-
 import Foundation
+import CoreLocation
 
 struct StateModel: Codable {
     let data : [State]
@@ -17,4 +11,10 @@ struct State: Codable {
     let capital: String
     let lat: String
     let long: String
+}
+
+extension State {
+    var capitalLocation: CLLocation {
+        return CLLocation(latitude: Double(lat)!, longitude: Double(long)!)
+    }
 }
