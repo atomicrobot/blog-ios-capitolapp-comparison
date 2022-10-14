@@ -1,16 +1,19 @@
 import UIKit
 import MapKit
+import Combine
 
 class ViewController: UITableViewController {
     private let viewModel = ViewModel(currentLocationClient: CurrentLocationClient(), apiClient: ApiClient())
+    private var cancellables: Set<AnyCancellable> = []
     
     override func viewDidLoad() {
         navigationController?.view.backgroundColor = .white
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StateCell")
-        self.viewModel.startTrackingDistanceFromStateCapitals { [weak self] in
-            guard let self = self else { return }
-            self.tableView.reloadData()
-        }
+        cancellables.insert(self.viewModel.startTrackingDistanceFromStateCapitals().replaceError(with: []).sink { items in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        })
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -1,5 +1,6 @@
 import Foundation
 import CoreLocation
+import Combine
 
 struct DisplayedState {
     let state: State
@@ -21,32 +22,20 @@ class ViewModel {
         self.apiClient = apiClient
     }
     
-    func startTrackingDistanceFromStateCapitals(_ statesDataChanged: @escaping () -> ()) {
-        // Load our state info
-        self.apiClient.loadUStates { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-                break
-            case .success(let result):
-                self.stateModel = result
-                self.dataChanged(statesDataChanged)
-                break
-            }
-        }
-        
-        // Start watching our current location
-        self.currentLocationClient.startTrackingCurrentLocation { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-                break
-            case .success(let result):
-                self.userLocation = result
-                self.dataChanged(statesDataChanged)
-                break
-            }
-        }
+    func startTrackingDistanceFromStateCapitals() -> AnyPublisher<[DisplayedState], Error> {
+
+        self.apiClient.loadUSStates().combineLatest(self.currentLocationClient.startTrackingCurrentLocation())
+            .map { (stateData: StateModel, currentLocation: CLLocation) in
+                self.userLocation = currentLocation
+                self.stateModel = stateData
+                self.states = stateData.data.map { state in
+                    let capitalLocation = state.capitalLocation
+                    let distance = Int(currentLocation.distance(from: capitalLocation) / 1000)
+                    let formattedCapitalDistance = state.capital + "  \(distance) km away"
+                    return DisplayedState(state: state, stateName: state.name, formattedCapitalDistance: formattedCapitalDistance)
+                }
+                return self.states
+            }.eraseToAnyPublisher()
     }
     
     func stopTrackingDistanceFromStateCapitals() {
