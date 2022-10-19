@@ -21,8 +21,11 @@ class CurrentLocationClient: NSObject {
         locationManager.distanceFilter = kCLLocationAccuracyHundredMeters
         
         locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
+
+        DispatchQueue.global(qos: .background).async {
+            if CLLocationManager.locationServicesEnabled() {
+                self.locationManager.startUpdatingLocation()
+            }
         }
 
         return currentLocation.eraseToAnyPublisher()
