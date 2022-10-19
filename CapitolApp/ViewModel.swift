@@ -1,5 +1,6 @@
 import Foundation
 import CoreLocation
+import Combine
 
 struct DisplayedState {
     let state: USState
@@ -13,6 +14,7 @@ class ViewModel: ObservableObject {
     
     var userLocation: CLLocation?
     private var stateModel: StateModel?
+    private var cancellables: Set<AnyCancellable> = []
     
     @Published var states: [DisplayedState] = []
     
@@ -20,56 +22,28 @@ class ViewModel: ObservableObject {
         self.currentLocationClient = currentLocationClient
         self.apiClient = apiClient
 
-        startTrackingDistanceFromStateCapitals()
+        cancellables.insert(startTrackingDistanceFromStateCapitals().replaceError(with: []).sink {_ in})
     }
     
-    func startTrackingDistanceFromStateCapitals() {
-        // Load our state info
-        self.apiClient.loadUStates { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-                break
-            case .success(let result):
-                self.stateModel = result
-                self.dataChanged()
-                break
-            }
+    func startTrackingDistanceFromStateCapitals() -> AnyPublisher<[DisplayedState], Error> {
+
+            self.apiClient.loadUSStates().combineLatest(self.currentLocationClient.startTrackingCurrentLocation())
+                .map { (stateData: StateModel, currentLocation: CLLocation) in
+                    self.userLocation = currentLocation
+                    self.stateModel = stateData
+                    DispatchQueue.main.async {
+                        self.states = stateData.data.map { state in
+                            let capitalLocation = state.capitalLocation
+                            let distance = Int(currentLocation.distance(from: capitalLocation) / 1000)
+                            let formattedCapitalDistance = state.capital + "  \(distance) km away"
+                            return DisplayedState(state: state, stateName: state.name, formattedCapitalDistance: formattedCapitalDistance)
+                        }
+                    }
+                    return self.states
+                }.eraseToAnyPublisher()
         }
-        
-        // Start watching our current location
-        self.currentLocationClient.startTrackingCurrentLocation { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-                break
-            case .success(let result):
-                self.userLocation = result
-                self.dataChanged()
-                break
-            }
-        }
-    }
     
     func stopTrackingDistanceFromStateCapitals() {
         self.currentLocationClient.stopTrackingCurrentLocation()
-    }
-    
-    private func dataChanged() {
-        // If we don't have our BOTH states AND current location, return an empty list
-        if let stateModel = self.stateModel, let userLocation = self.userLocation {
-            DispatchQueue.main.async {
-                self.states = stateModel.data.map { state in
-                    let capitalLocation = state.capitalLocation
-                    let distance = Int(userLocation.distance(from: capitalLocation) / 1000)
-                    let formattedCapitalDistance = state.capital + "  \(distance) km away"
-                    return DisplayedState(state: state, stateName: state.name, formattedCapitalDistance: formattedCapitalDistance)
-                }
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.states = []
-            }
-        }
     }
 }

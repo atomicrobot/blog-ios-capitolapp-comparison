@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 typealias ApiResult<T: Codable> = Result<T, ApiError>
 
@@ -10,23 +11,13 @@ enum ApiError: Error {
 }
 
 class ApiClient {
-    func loadUStates(completion: @escaping (ApiResult<StateModel>) -> ()) {
-        let request = URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")!
-        jsonRequest(request, completion)
-    }
-}
-
-extension ApiClient {
-    private func jsonRequest<T: Codable>(_ request: URL, _ completion: @escaping (ApiResult<T>) -> ()) {
-        Task {
+    func loadUSStates() -> AnyPublisher<StateModel, Error> {
+            let request =  URL(string: "https://raw.githubusercontent.com/atomicrobot/blog-ios-capitolapp-comparison/uikit-closure/data.json")!
             let decoder = JSONDecoder()
-            do {
-                let (data, _) = try await URLSession.shared.data(from: request)
-                let capitalData = try decoder.decode(T.self , from: data)
-                completion(ApiResult.success(capitalData))
-            } catch {
-                completion(ApiResult.failure(ApiError.unspecificError(error)))
-            }
-        }
-    }
+            return URLSession.shared.dataTaskPublisher(for: request)
+               .map { $0.data }
+               .tryMap { try decoder.decode(StateModel.self, from: $0) }
+               .mapError { return ApiError.unspecificError($0) }
+               .eraseToAnyPublisher()
+       }
 }
