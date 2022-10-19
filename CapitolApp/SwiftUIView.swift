@@ -19,16 +19,20 @@ struct SwiftUIView: View {
     var body: some View {
         NavigationView {
             List {
+                // Loop thru the states
                 ForEach(viewModel.states, id: \.stateName) { displayedState in
 
+                    // Get the region for each state
                     let region = MKCoordinateRegion.zoom(initialRegion: MKCoordinateRegion(coordinates: [CLLocationCoordinate2D(latitude: Double(displayedState.state.lat)!, longitude: Double(displayedState.state.long)!), viewModel.userLocation!.coordinate])!)
 
+                    // Navigation Link to the Map View of the state
                     NavigationLink {
                         MapView(state: displayedState.state,
                                 region: region,
                                 cityAnnotation: idLocation(name: displayedState.state.capital,
                                                            latitude: Double(displayedState.state.lat)!,
                                                            longitude: Double(displayedState.state.long)!)).navigationTitle(displayedState.state.abbreviation)
+                    // Label for each row in the list
                     } label: {
                         VStack {
                             HStack {
